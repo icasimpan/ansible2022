@@ -1,0 +1,5 @@
+- name: geerlingguy.java
+  version: 2.2.0
+
+- name: singleplatform-eng.users
+  version: v1.2.6

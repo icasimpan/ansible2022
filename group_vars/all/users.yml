@@ -1,0 +1,16 @@
+---
+groups_to_create:
+  - name: devgroup
+    gid: 10001
+
+## NOTE: 'password' value is actually a hash generated using command:
+##          openssl passwd -1 'p@ssw0rd'
+##
+users:
+  - name: Developer
+    username: developer
+    uid: 1001
+    password: $1$42qOEWdz$B3LprTsPSEmbH.gD7kSkC/
+    groups: [devgroup]
+    ssh_key:
+      - "Dummy_ssh_key___change_this"

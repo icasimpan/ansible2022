@@ -1,0 +1,25 @@
+---
+- name: Deploy Java Service
+  hosts: app_servers
+  become: true
+
+  vars:
+    java_packages: java-11-openjdk
+    jar_file: files/java_service.jar
+    jar_destdir: /opt/service
+
+  roles:
+    - { role: singleplatform-eng.users }  ## creates 'developer' user with password 'p@ssw0rd' using config group_vars/all/users.yml
+    - { role: geerlingguy.java }
+ 
+  tasks:
+    - name: "Create destination directory {{ jar_destdir}} if it doesn't exist yet"
+      ansible.builtin.file:
+        path: "{{ jar_destdir }}"
+        state: directory
+        mode: '0755'
+ 
+    - name: "Copy service jar file"
+      copy:
+        src: "{{ jar_file }}"
+        dest: "{{ jar_destdir }}"
